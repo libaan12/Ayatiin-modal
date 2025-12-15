@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Icons } from '../components/Icons';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -27,8 +27,7 @@ export const Login = () => {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      // We don't manually navigate here. The useEffect above will catch the auth state change.
-      // This prevents the race condition where navigation happens before AuthContext updates.
+      // AuthContext handles navigation via useEffect
     } catch (err: any) {
       console.error(err);
       setError("Invalid email or password. Please try again.");
@@ -39,20 +38,24 @@ export const Login = () => {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col justify-center relative overflow-hidden">
       {/* Background Decor */}
-      <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-r from-primary-600 to-secondary-500 transform -skew-y-3 origin-top-left -translate-y-12 shadow-lg"></div>
+      <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-r from-slate-900 to-primary-900 transform -skew-y-3 origin-top-left -translate-y-12 shadow-lg"></div>
       <div className="absolute bottom-0 right-0 w-64 h-64 bg-primary-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 transform translate-x-1/2 translate-y-1/2"></div>
       <div className="absolute top-0 left-0 w-64 h-64 bg-secondary-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 transform -translate-x-1/2 -translate-y-1/2"></div>
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10 px-4">
         <div className="text-center mb-8">
-           <div className="h-24 w-24 bg-white rounded-2xl shadow-xl mx-auto flex items-center justify-center mb-4 transform rotate-3 hover:rotate-0 transition-all duration-300 p-2">
+           <div className="h-24 w-24 bg-white rounded-2xl shadow-xl mx-auto flex items-center justify-center mb-6 transform rotate-3 hover:rotate-0 transition-all duration-300 p-2">
               <img src="https://files.catbox.moe/fsno8w.png" alt="Ayatiin Logo" className="w-full h-full object-contain" />
            </div>
-           <h2 className="text-3xl font-extrabold text-slate-800 tracking-tight">
-             Ayatiin Modal P & S school
+           
+           <h2 className="text-3xl font-extrabold tracking-tight mb-1">
+             <span className="text-slate-900">Ayatiin</span>{' '}
+             <span className="text-primary-600">Model</span>
            </h2>
-           <p className="mt-2 text-sm text-slate-500 font-medium">
-             School Management System
+           <h3 className="text-lg font-bold text-slate-600 mb-3 tracking-wide">P & S School</h3>
+           
+           <p className="mt-2 text-sm text-slate-400 font-medium max-w-xs mx-auto leading-relaxed">
+             Empowering education through seamless digital management and connectivity.
            </p>
         </div>
 
@@ -122,22 +125,26 @@ export const Login = () => {
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                    Signing In...
+                    Accessing Portal...
                   </span>
-                ) : 'Sign In Dashboard'}
+                ) : 'Secure Login'}
               </button>
             </div>
           </form>
           
-          <div className="mt-6 text-center">
+          <div className="mt-6 flex flex-col items-center space-y-3">
+             <Link to="/download" className="flex items-center text-sm font-bold text-primary-600 hover:text-primary-800 transition-colors">
+               <Icons.Download className="h-4 w-4 mr-1.5" />
+               Download Android App
+             </Link>
              <p className="text-xs text-slate-400">
-               Forgot credentials? Contact your System Administrator.
+               Forgot credentials? Contact Administration.
              </p>
           </div>
         </div>
         
         <div className="mt-8 text-center">
-           <p className="text-slate-500 text-xs font-medium opacity-70">&copy; {new Date().getFullYear()} Ayatiin System. All rights reserved.</p>
+           <p className="text-slate-500 text-xs font-medium opacity-70">&copy; {new Date().getFullYear()} Ayatiin Model P & S School.</p>
         </div>
       </div>
     </div>

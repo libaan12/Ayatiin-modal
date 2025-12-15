@@ -7,6 +7,7 @@ import { UserRole } from './types';
 
 // Lazy load pages for code splitting to resolve chunk size warnings
 const Login = React.lazy(() => import('./pages/Login').then(module => ({ default: module.Login })));
+const Download = React.lazy(() => import('./pages/Download').then(module => ({ default: module.Download })));
 const Dashboard = React.lazy(() => import('./pages/Dashboard').then(module => ({ default: module.Dashboard })));
 const Students = React.lazy(() => import('./pages/Students').then(module => ({ default: module.Students })));
 const Classes = React.lazy(() => import('./pages/Classes').then(module => ({ default: module.Classes })));
@@ -42,6 +43,7 @@ const AppRoutes = () => {
     <Suspense fallback={<LoadingSpinner />}>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/download" element={<Download />} />
         
         <Route path="/" element={<ProtectedRoute><Layout user={user} role={user?.role}><Outlet /></Layout></ProtectedRoute>}>
           <Route index element={<Dashboard />} />
