@@ -49,7 +49,7 @@ export const Login = () => {
               <img src="https://files.catbox.moe/fsno8w.png" alt="Ayatiin Logo" className="w-full h-full object-contain" />
            </div>
            <h2 className="text-3xl font-extrabold text-slate-800 tracking-tight">
-             Ayatiin
+             Ayatiin Modal P & S school
            </h2>
            <p className="mt-2 text-sm text-slate-500 font-medium">
              School Management System
