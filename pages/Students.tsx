@@ -4,6 +4,7 @@ import { Icons } from '../components/Icons';
 import { Button, Input, Modal, Select, Badge } from '../components/UI';
 import { useData } from '../hooks/useFirebase';
 import * as Utils from '../utils';
+import * as XLSX from 'xlsx';
 import { Student } from '../types';
 import { useUI } from '../contexts/UIContext';
 
@@ -94,14 +95,14 @@ export const Students = () => {
     reader.onload = async (evt: any) => {
       try {
         const arrayBuffer = evt.target.result;
-        const wb = (window as any).XLSX.read(arrayBuffer, { type: 'array' });
+        const wb = XLSX.read(arrayBuffer, { type: 'array' });
         const wsname = wb.SheetNames[0];
         const ws = wb.Sheets[wsname];
-        const data = (window as any).XLSX.utils.sheet_to_json(ws);
+        const data = XLSX.utils.sheet_to_json(ws);
         
         if (confirm(`Are you sure you want to upload ${data.length} students?`)) {
           let count = 0;
-          for (const row of data) {
+          for (const row of (data as any[])) {
             await add({
               fullName: row['Full Name'] || row['Name'],
               rollNumber: row['Roll Number'] || '',
