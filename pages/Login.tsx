@@ -37,8 +37,8 @@ export const Login = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col justify-center relative overflow-hidden">
-      {/* Background Decor */}
-      <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-r from-slate-900 to-primary-900 transform -skew-y-3 origin-top-left -translate-y-12 shadow-lg"></div>
+      {/* Background Decor - Restored Green Header */}
+      <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-r from-primary-600 to-green-500 transform -skew-y-3 origin-top-left -translate-y-12 shadow-lg"></div>
       <div className="absolute bottom-0 right-0 w-64 h-64 bg-primary-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 transform translate-x-1/2 translate-y-1/2"></div>
       <div className="absolute top-0 left-0 w-64 h-64 bg-secondary-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 transform -translate-x-1/2 -translate-y-1/2"></div>
 
@@ -52,10 +52,10 @@ export const Login = () => {
              <span className="text-slate-900">Ayatiin</span>{' '}
              <span className="text-primary-600">Model</span>
            </h2>
-           <h3 className="text-lg font-bold text-slate-600 mb-3 tracking-wide">P & S School</h3>
+           <h3 className="text-xl font-bold text-slate-600 mb-2 tracking-wide">P & S School</h3>
            
-           <p className="mt-2 text-sm text-slate-400 font-medium max-w-xs mx-auto leading-relaxed">
-             Empowering education through seamless digital management and connectivity.
+           <p className="mt-1 text-sm text-slate-400 font-medium uppercase tracking-widest">
+             School Management System
            </p>
         </div>
 

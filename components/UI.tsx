@@ -64,19 +64,18 @@ export const Modal = ({ isOpen, onClose, title, children }: any) => {
         <div className="fixed inset-0 bg-slate-900 bg-opacity-75 transition-opacity backdrop-blur-sm" onClick={onClose} aria-hidden="true"></div>
         <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
         <div className="inline-block align-bottom bg-white rounded-xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg w-full ring-1 ring-black ring-opacity-5">
-          <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-            <div className="sm:flex sm:items-start">
-              <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
-                <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-xl leading-6 font-bold text-slate-900" id="modal-title">{title}</h3>
-                  <button onClick={onClose} className="text-slate-400 hover:text-slate-500 bg-slate-100 rounded-full p-1 hover:bg-slate-200 transition-colors">
-                    <Icons.X className="h-5 w-5" />
-                  </button>
-                </div>
-                <div className="mt-2 w-full max-h-[80vh] overflow-y-auto">
-                  {children}
-                </div>
-              </div>
+          {/* Header Section */}
+          <div className="bg-green-50 px-4 py-4 sm:px-6 border-b border-green-100 flex justify-between items-center">
+              <h3 className="text-xl leading-6 font-extrabold text-green-800 tracking-tight" id="modal-title">{title}</h3>
+              <button onClick={onClose} className="text-green-600 hover:text-green-800 bg-white hover:bg-green-100 rounded-full p-1.5 transition-colors shadow-sm">
+                <Icons.X className="h-5 w-5" />
+              </button>
+          </div>
+          
+          {/* Content Section */}
+          <div className="bg-white px-4 pt-5 pb-4 sm:p-6">
+            <div className="w-full max-h-[80vh] overflow-y-auto">
+              {children}
             </div>
           </div>
         </div>
