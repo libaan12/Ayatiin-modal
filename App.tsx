@@ -23,7 +23,11 @@ import { SchoolCalendar } from './pages/SchoolCalendar';
 const ProtectedRoute = ({ allowedRoles, children }: any) => {
   const { user, loading } = useAuth();
   
-  if (loading) return <div className="min-h-screen flex items-center justify-center bg-slate-50 text-indigo-600 font-medium">Loading Application...</div>;
+  if (loading) return (
+    <div className="min-h-screen flex items-center justify-center bg-slate-50">
+       <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary-100 border-t-primary-600"></div>
+    </div>
+  );
   if (!user) return <Navigate to="/login" replace />;
   if (allowedRoles && !allowedRoles.includes(user.role)) return <Navigate to="/" replace />;
   
