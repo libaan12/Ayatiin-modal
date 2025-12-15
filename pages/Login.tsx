@@ -37,10 +37,10 @@ export const Login = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col justify-center relative overflow-hidden">
-      {/* Background Decor - Restored Green Header */}
-      <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-r from-primary-600 to-green-500 transform -skew-y-3 origin-top-left -translate-y-12 shadow-lg"></div>
-      <div className="absolute bottom-0 right-0 w-64 h-64 bg-primary-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 transform translate-x-1/2 translate-y-1/2"></div>
-      <div className="absolute top-0 left-0 w-64 h-64 bg-secondary-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 transform -translate-x-1/2 -translate-y-1/2"></div>
+      {/* Background Decor - Soft/Light Green Header for visibility */}
+      <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-r from-green-200 to-emerald-100 transform -skew-y-3 origin-top-left -translate-y-12 shadow-lg"></div>
+      <div className="absolute bottom-0 right-0 w-64 h-64 bg-green-50 rounded-full mix-blend-multiply filter blur-3xl opacity-50 transform translate-x-1/2 translate-y-1/2"></div>
+      <div className="absolute top-0 left-0 w-64 h-64 bg-emerald-50 rounded-full mix-blend-multiply filter blur-3xl opacity-50 transform -translate-x-1/2 -translate-y-1/2"></div>
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10 px-4">
         <div className="text-center mb-8">
@@ -50,11 +50,11 @@ export const Login = () => {
            
            <h2 className="text-3xl font-extrabold tracking-tight mb-1">
              <span className="text-slate-900">Ayatiin</span>{' '}
-             <span className="text-primary-600">Model</span>
+             <span className="text-green-600">Model</span>
            </h2>
            <h3 className="text-xl font-bold text-slate-600 mb-2 tracking-wide">P & S School</h3>
            
-           <p className="mt-1 text-sm text-slate-400 font-medium uppercase tracking-widest">
+           <p className="mt-1 text-sm text-slate-500 font-medium uppercase tracking-widest">
              School Management System
            </p>
         </div>
