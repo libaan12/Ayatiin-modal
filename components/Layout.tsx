@@ -43,14 +43,15 @@ export const Layout = ({ children, user, role }: any) => {
         onClick={() => setSidebarOpen(false)}
       ></div>
 
-      {/* Sidebar */}
+      {/* Sidebar - Soft Green Background (bg-primary-50) */}
       <aside 
         className={`fixed inset-y-0 left-0 z-30 w-64 bg-primary-50 text-slate-800 transform transition-transform duration-300 ease-in-out md:translate-x-0 md:static flex flex-col shadow-xl border-r border-primary-100 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
       >
-        <div className="flex items-center justify-center h-20 bg-primary-600 shadow-md px-4 flex-shrink-0">
+        {/* Sidebar Header - Solid Green (bg-primary-600) to match main header */}
+        <div className="flex items-center justify-center h-16 bg-primary-600 shadow-md px-4 flex-shrink-0">
           <div className="flex items-center space-x-3">
-             <img src="https://files.catbox.moe/fsno8w.png" alt="Logo" className="h-10 w-10 bg-white rounded-lg p-1" />
-             <h1 className="text-xl font-bold tracking-wider text-white truncate">{appSettings.appName}</h1>
+             <img src="https://files.catbox.moe/fsno8w.png" alt="Logo" className="h-8 w-8 bg-white rounded-lg p-1" />
+             <h1 className="text-lg font-bold tracking-wider text-white truncate">{appSettings.appName}</h1>
           </div>
         </div>
         
@@ -61,7 +62,7 @@ export const Layout = ({ children, user, role }: any) => {
               to={item.path}
               className={({ isActive }) => `group flex items-center px-3 py-3 text-sm font-bold rounded-xl transition-all duration-200 mb-1 ${
                 isActive 
-                  ? 'bg-blue-600 text-white shadow-lg translate-x-1' 
+                  ? 'bg-secondary-600 text-white shadow-lg translate-x-1' 
                   : 'text-slate-600 hover:bg-white hover:text-primary-600 hover:shadow-sm'
               }`}
               onClick={() => setSidebarOpen(false)}
@@ -82,7 +83,7 @@ export const Layout = ({ children, user, role }: any) => {
 
       {/* Main Content Wrapper */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-        {/* Header - Solid Green */}
+        {/* Header - Solid Green (bg-primary-600) */}
         <header className="flex justify-between items-center h-16 bg-primary-600 shadow-md px-6 z-10 sticky top-0 flex-shrink-0">
           {/* Hamburger Menu - Visible only on mobile */}
           <button className="md:hidden text-primary-100 hover:text-white focus:outline-none p-2 rounded-md hover:bg-primary-700" onClick={() => setSidebarOpen(true)}>
