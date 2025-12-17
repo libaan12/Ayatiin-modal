@@ -13,7 +13,7 @@ import { Icons } from '../components/Icons';
 
 export const Settings = () => {
   const navigate = useNavigate();
-  const { data: announcements, add: addAnnouncement, remove: removeAnnouncement } = useData<any>('announcements');
+  const { data: announcements, add: addAnnouncement } = useData<any>('announcements');
   const { data: settings } = useData<any>('settings');
   const { user } = useAuth();
   const { showToast } = useUI();
@@ -45,12 +45,15 @@ export const Settings = () => {
   const postAnnouncement = async () => {
     if (!msg) return;
     try {
-      // Delete existing active announcements first
-      const removalPromises = announcements.map(a => removeAnnouncement(a.id));
-      await Promise.all(removalPromises);
+      // 1. Delete all existing announcements from Firebase by setting the node to null
+      await set(ref(db, 'announcements'), null);
 
-      // Add new announcement
+      // 2. Explicitly clear local storage cache to prevent ghost data
+      localStorage.removeItem('ayatiin_cache_announcements');
+
+      // 3. Add new announcement
       await addAnnouncement({ message: msg, date: new Date().toISOString(), active: true });
+      
       showToast('Announcement Posted and Updated', 'success');
       setMsg('');
     } catch (e) {
