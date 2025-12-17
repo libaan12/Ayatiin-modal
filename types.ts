@@ -39,6 +39,7 @@ export interface Student {
   fullName: string;
   rollNumber: string;
   classId: string;
+  gender: 'Male' | 'Female';
   parentName: string;
   parentContact: string;
 }

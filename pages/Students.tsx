@@ -23,7 +23,7 @@ export const Students = () => {
   const [deleteId, setDeleteId] = useState<string | null>(null);
   
   const [formData, setFormData] = useState<Partial<Student>>({ 
-    fullName: '', rollNumber: '', classId: '', parentName: '', parentContact: '' 
+    fullName: '', rollNumber: '', classId: '', parentName: '', parentContact: '', gender: 'Male'
   });
 
   // Auto-open modal if ?action=add is present
@@ -77,13 +77,13 @@ export const Students = () => {
   const closeModal = () => {
     setIsModalOpen(false);
     setEditingId(null);
-    setFormData({ fullName: '', rollNumber: '', classId: '', parentName: '', parentContact: '' });
+    setFormData({ fullName: '', rollNumber: '', classId: '', parentName: '', parentContact: '', gender: 'Male' });
   };
 
   const downloadTemplate = () => {
     const templateData = [
-      { "Full Name": "John Doe", "Roll Number": "101", "Class": "class_id_here", "Parent Name": "Jane Doe", "Parent Contact": "555-0101" },
-      { "Full Name": "Alice Smith", "Roll Number": "102", "Class": "class_id_here", "Parent Name": "Bob Smith", "Parent Contact": "555-0102" }
+      { "Full Name": "John Doe", "Gender": "Male", "Roll Number": "101", "Class": "class_id_here", "Parent Name": "Jane Doe", "Parent Contact": "555-0101" },
+      { "Full Name": "Alice Smith", "Gender": "Female", "Roll Number": "102", "Class": "class_id_here", "Parent Name": "Bob Smith", "Parent Contact": "555-0102" }
     ];
     Utils.exportToExcel(templateData, 'student_upload_template');
   };
@@ -108,7 +108,8 @@ export const Students = () => {
               rollNumber: row['Roll Number'] || '',
               classId: row['Class'] || '',
               parentName: row['Parent Name'] || '',
-              parentContact: row['Parent Contact'] || ''
+              parentContact: row['Parent Contact'] || '',
+              gender: row['Gender'] || 'Male'
             } as Student);
             count++;
           }
@@ -202,13 +203,14 @@ export const Students = () => {
                <tr>
                  <th className="px-6 py-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Roll No</th>
                  <th className="px-6 py-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Name</th>
+                 <th className="px-6 py-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Gender</th>
                  <th className="px-6 py-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Class</th>
                  <th className="px-6 py-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Parent Info</th>
                  <th className="px-6 py-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Actions</th>
                </tr>
              </thead>
              <tbody className="bg-white divide-y divide-slate-200">
-               {loading ? <tr><td colSpan={5} className="p-4 text-center">Loading...</td></tr> : filteredStudents.map((s) => {
+               {loading ? <tr><td colSpan={6} className="p-4 text-center">Loading...</td></tr> : filteredStudents.map((s) => {
                  const className = classes.find((c:any) => c.id === s.classId);
                  return (
                    <tr key={s.id} className="hover:bg-slate-50 transition-colors">
@@ -220,6 +222,9 @@ export const Students = () => {
                           </div>
                           <div className="text-sm font-medium text-slate-900">{s.fullName || 'Unknown'}</div>
                         </div>
+                     </td>
+                     <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500">
+                        <Badge color={s.gender === 'Female' ? 'indigo' : 'blue'}>{s.gender || 'Male'}</Badge>
                      </td>
                      <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500">
                        <Badge color="blue">{className ? `${className.name} ${className.suffix}` : 'N/A'}</Badge>
@@ -259,13 +264,19 @@ export const Students = () => {
           <div className="grid grid-cols-2 gap-4">
              <Input label="Roll Number" value={formData.rollNumber} onChange={(e:any) => setFormData({...formData, rollNumber: e.target.value})} />
              <Select 
-               label="Class" 
-               value={formData.classId}
-               onChange={(e:any) => setFormData({...formData, classId: e.target.value})}
-               options={[{label: 'Select Class', value: ''}, ...classOptions]} 
-               icon={Icons.Book}
+               label="Gender" 
+               value={formData.gender || 'Male'}
+               onChange={(e:any) => setFormData({...formData, gender: e.target.value})}
+               options={[{label: 'Male', value: 'Male'}, {label: 'Female', value: 'Female'}]}
              />
           </div>
+          <Select 
+            label="Class" 
+            value={formData.classId}
+            onChange={(e:any) => setFormData({...formData, classId: e.target.value})}
+            options={[{label: 'Select Class', value: ''}, ...classOptions]} 
+            icon={Icons.Book}
+          />
           <Input label="Parent Name" value={formData.parentName} onChange={(e:any) => setFormData({...formData, parentName: e.target.value})} icon={Icons.Users} />
           <Input label="Parent Contact" value={formData.parentContact} onChange={(e:any) => setFormData({...formData, parentContact: e.target.value})} icon={Icons.Phone} />
           <Button onClick={handleSave} className="w-full">{editingId ? 'Update Student' : 'Save Student'}</Button>
